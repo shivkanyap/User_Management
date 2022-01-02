@@ -4,9 +4,6 @@ import { Container, Table } from "reactstrap";
 import { Button } from "reactstrap";
 import styles from "./styles.css";
 import AddUser from "./AddUser";
-import { Form, FormGroup } from "reactstrap";
-import { Label, Input } from "reactstrap";
-import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import RemoveUser from "./RemoveUser";
 
 const HomePage = () => {
@@ -18,24 +15,17 @@ const HomePage = () => {
 
   console.log(users, "users");
   const addUserCallBack = (childData) => {
-    // [...childData]
     // childData.id = users.length + 1;
     setUsers([...users, childData]);
-    console.log(childData, "vhh");
   };
 
   const removeUserCallBack = (childData) => {
-   console.log(childData,'child')
-   let array= [...users]
-   console.log(array,'AA')
-  console.log (typeof(childData),'type')
-   let filteredData=array.filter(item=>item.userid!==parseInt(childData))
-   console.log(filteredData,'filter')
+    let array = [...users];
 
-   setUsers(filteredData)
+    let filteredData = array.filter((item) => item.userid !== childData);
+
+    setUsers(filteredData);
   };
-
-
 
   const parentCallBack = (childData) => {
     setAddModal(childData, "Cd");
@@ -44,8 +34,7 @@ const HomePage = () => {
   const removeParentCallBack = (removeChildData) => {
     setRemoveModal(removeChildData);
   };
-  const addUserdata = () => {};
-  const handleRemoveUser = () => {};
+
   return (
     <div>
       <div className="outer">
