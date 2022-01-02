@@ -6,7 +6,7 @@ import { Label, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 
-const AddUser = ({ onOpen ,parentCallBack}) => {
+const AddUser = ({ onOpen ,parentCallBack,addUserCallback,userArray}) => {
   const [userData, setUserData] = useState([{}]);
 
   const [name,setName] = useState('')
@@ -14,13 +14,16 @@ const AddUser = ({ onOpen ,parentCallBack}) => {
   const [address,setAddress]=useState('')
   const [date,setDate]=useState('')
   const handleSubmit=()=>{
+    
     const data={
       name,
       email,
       address,
       date
     }
-    
+    addUserCallback(data)
+    parentCallBack(false);
+    console.log(data,'in data')
   }
   const handleModalClose = () => {
     parentCallBack(false);

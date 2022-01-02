@@ -7,39 +7,79 @@ import AddUser from "./AddUser";
 import { Form, FormGroup } from "reactstrap";
 import { Label, Input } from "reactstrap";
 import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
-import RemoveUser  from "./RemoveUser";
+import RemoveUser from "./RemoveUser";
 
 const HomePage = () => {
   const [addModal, setAddModal] = React.useState(false);
-  const [removeModal,setRemoveModal] =React.useState(false)
-  const [users,setUsers]=React.useState([])
+  const [removeModal, setRemoveModal] = React.useState(false);
+  const value = 0;
 
-  const parentCallBack=(childData)=>{
-    setAddModal(childData)
-  }
+  const [users, setUsers] = React.useState([]);
 
-  const removeParentCallBack=(removeChildData)=>{
-    setRemoveModal(removeChildData)
-  }
-  const addUserdata=()=>{
+  console.log(users, "users");
+  const addUserCallBack = (childData) => {
+    // [...childData]
+    childData.id = users.length + 1;
+    setUsers([...users, childData]);
+    console.log(childData, "vhh");
+  };
 
-  }
+  const removeUserCallBack = (childData) => {
+   console.log(childData,'child')
+   let array= [...users]
+   console.log(array,'AA')
+  console.log (typeof(childData),'type')
+   let filteredData=array.filter(item=>item.id!==parseInt(childData))
+   console.log(filteredData,'filter')
+
+   setUsers(filteredData)
+  };
+
+
+
+  const parentCallBack = (childData) => {
+    setAddModal(childData, "Cd");
+  };
+
+  const removeParentCallBack = (removeChildData) => {
+    setRemoveModal(removeChildData);
+  };
+  const addUserdata = () => {};
   const handleRemoveUser = () => {};
   return (
     <div>
       <div className="outer">
         <div className="inner">
-          <Button type="submit" class="msgBtn" onClick={() => setAddModal(true)}>
+          <Button
+            type="submit"
+            class="msgBtn"
+            onClick={() => setAddModal(true)}
+          >
             AddUser
           </Button>
-          {addModal && <AddUser onOpen={addModal} parentCallBack={parentCallBack} addUserdata={addUserdata} />}
-          
+          {addModal && (
+            <AddUser
+              onOpen={addModal}
+              parentCallBack={parentCallBack}
+              addUserCallback={addUserCallBack}
+            />
+          )}
         </div>
         <div className="inner">
-          <Button type="submit" className="msgBtn2" onClick={()=>setRemoveModal(true)}>
+          <Button
+            type="submit"
+            className="msgBtn2"
+            onClick={() => setRemoveModal(true)}
+          >
             Remove User
           </Button>
-          {removeModal &&  <RemoveUser onOpen={removeModal} removeParentCallBack={removeParentCallBack}/>}
+          {removeModal && (
+            <RemoveUser
+              onOpen={removeModal}
+              removeParentCallBack={removeParentCallBack}
+              removeUserCallBack={removeUserCallBack}
+            />
+          )}
         </div>
       </div>
       <Container className="bg-light border">
@@ -54,24 +94,16 @@ const HomePage = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
+            {users &&
+              users.map((item, index) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{item.name}</td>
+                  <td>{item.email}</td>
+                  <td>{item.address}</td>
+                  <td>{item.date}</td>
+                </tr>
+              ))}
           </tbody>
         </Table>
       </Container>
