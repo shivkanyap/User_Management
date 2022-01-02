@@ -8,6 +8,7 @@ import { Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 
 const AddUser = ({ onOpen ,parentCallBack,addUserCallback,userArray}) => {
   const [userData, setUserData] = useState([{}]);
+  const [userid,setUserId]=useState()
 
   const [name,setName] = useState('')
   const [email,setEmail]=useState('')
@@ -19,7 +20,8 @@ const AddUser = ({ onOpen ,parentCallBack,addUserCallback,userArray}) => {
       name,
       email,
       address,
-      date
+      date,
+      userid
     }
     addUserCallback(data)
     parentCallBack(false);
@@ -37,6 +39,16 @@ const AddUser = ({ onOpen ,parentCallBack,addUserCallback,userArray}) => {
         <ModalHeader toggle={function noRefCheck() {}}>Add User</ModalHeader>
         <ModalBody>
           <Form>
+          <FormGroup>
+              <Label >UserId</Label>
+              <Input
+                // id="exampleEmail"
+                name="userId"
+                placeholder="userid"
+                type="number"
+                onChange={(e)=>setUserId(e.target.value)}
+              />
+            </FormGroup>
             <FormGroup>
               <Label >Username</Label>
               <Input

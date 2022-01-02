@@ -19,7 +19,7 @@ const HomePage = () => {
   console.log(users, "users");
   const addUserCallBack = (childData) => {
     // [...childData]
-    childData.id = users.length + 1;
+    // childData.id = users.length + 1;
     setUsers([...users, childData]);
     console.log(childData, "vhh");
   };
@@ -29,7 +29,7 @@ const HomePage = () => {
    let array= [...users]
    console.log(array,'AA')
   console.log (typeof(childData),'type')
-   let filteredData=array.filter(item=>item.id!==parseInt(childData))
+   let filteredData=array.filter(item=>item.userid!==parseInt(childData))
    console.log(filteredData,'filter')
 
    setUsers(filteredData)
@@ -97,7 +97,7 @@ const HomePage = () => {
             {users &&
               users.map((item, index) => (
                 <tr>
-                  <td>{index + 1}</td>
+                  <td>{item.userid}</td>
                   <td>{item.name}</td>
                   <td>{item.email}</td>
                   <td>{item.address}</td>
